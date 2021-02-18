@@ -1,0 +1,38 @@
+name: G_dual_PFG_WF_SNR_test_Image_roi_add5
+suffix: _SR  # add suffix to saved images
+model: sr
+distortion: sr
+scale: 4
+crop_border: ~  # crop border when evaluation. If None(~), crop the scale pixels
+gpu_ids: [0]
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: set5
+    mode: LQGT
+    dataroot_GT: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/SNR/Image/SIMG_4X
+    dataroot_LQ: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/SNR/Image/roi_SRRF/8bit_add5
+    dataroot_WF: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/SNR/Image/roi/remove_badpix
+  # test_2:  # the 2st test dataset
+  #  name: set14
+  #   mode: LQGT
+  #   dataroot_GT: /mnt/SSD/xtwang/BasicSR_datasets/val_set14/Set14
+  #   dataroot_LQ: /mnt/SSD/xtwang/BasicSR_datasets/val_set14/Set14_bicLRx4
+
+#### network structures
+network_G:
+  which_model_G: RRDBNet
+  in_nc: 2
+  out_nc: 1
+  nf: 64
+  nb: 23
+  upscale: 4
+
+#### path
+path:
+  pretrain_model_G: /home/rchenbe/rchenbe/BasicSR_net12_gray_dual_input_FFTloss/ESRGAN_annapalm_models/dual_PFG/16200_G.pth
+  #/home/rchenbe/data/BasicSR_netD12_gray_dual_input_FFTloss/test_fftloss_1P_0.01FFT_continue_1P(msssim_l1)_0.01FFT_0.1F_0.01GAN_lr1e-4/models/14200_G.pth
+  
+  
+  #/home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/experiments/Net_2input_1fps_training_ms_ssim_l1_lr3e-4_200500G_continue_lr1.5e-4_90600_continue_lr2e-4_140100_continue3e-4_continue_0.9P_0.1F_lr1e-4_continue_1P_0.1F_2.5e-4G_lr1e-4_continue_from_50600G_lr5e-5_continue_from_109900G_lr2.5e-5/models/78900_G.pth
+   #/home/rchenbe/data/BasicSR-netD12-gray-dual-input-experiments/Net_2input_microtubule_training_ms_ssim_l1_lr3e-4_continue_0.91P_0.1F_256B_1e-4lr_continue1P_0.1F_256B_1e-4lr/models/111500_G.pth

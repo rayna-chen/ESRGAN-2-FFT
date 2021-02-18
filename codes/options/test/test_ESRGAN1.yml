@@ -1,0 +1,29 @@
+name: test_sub_roi_microtubule_with_cos7_MT
+suffix: _SR  # add suffix to saved images
+model: sr
+distortion: sr
+scale: 4
+crop_border: ~  # crop border when evaluation. If None(~), crop the scale pixels
+gpu_ids: [0]
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: set5
+    mode: LQGT
+    dataroot_GT: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/microtubule/temp/deep_storm/HR
+    dataroot_LQ: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/microtubule/temp/deep_storm/SRRF
+    dataroot_WF: /home/rchenbe/rchenbe/BasicSR-netD12-gray_dual_input/data_samples/microtubule/temp/deep_storm/WF
+
+
+#### network structures
+network_G:
+  which_model_G: RRDBNet
+  in_nc: 1
+  out_nc: 1
+  nf: 64
+  nb: 23
+  upscale: 4
+
+#### path
+path:
+  pretrain_model_G: /home/rchenbe/data/BasicSR-netD12-gray-dual-input-experiments/Net_2input_microtubule_training_ms_ssim_l1_lr3e-4_continue_0.91P_0.1F_256B_1e-4lr_continue1P_0.1F_256B_1e-4lr/models/111500_G.pth
